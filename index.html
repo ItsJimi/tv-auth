@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <div id="code">Loading...</div>
+  </body>
+  <script>
+    const ws = new WebSocket("ws://localhost:8080", "protocolOne")
+    let code;
+
+    ws.onopen = (event) => {
+      code = (Math.floor(Math.random() * 10000) + 10000).toString().substring(1)
+      ws.send(code)
+      document.getElementById("code").innerHTML = code
+    }
+
+    ws.onmessage = (event) => {
+      console.log(event.data)
+    }
+  </script>
+</html>
